@@ -3,10 +3,10 @@ pub mod lib {
     use std::fmt::Debug;
 
     #[derive(BinRead, PartialEq, Debug)]
-    pub struct Share {
-	pub lease_version: u32,
-	pub lease_data_length: u32,
-	pub lease_count: u32,
+    pub struct Lease {
+	pub version: u32,
+	pub data_length: u32,
+	pub count: u32,
 
 //        #[br(count=
 //        pub share_data: Vec<u8>,

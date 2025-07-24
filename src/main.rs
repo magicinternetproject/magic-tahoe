@@ -15,12 +15,12 @@ use magic_tahoe::lib::*;
 fn main() {
 }
 
-fn read_cap(filename: &str) -> result::Result<Share, io::Error> {
+fn read_cap(filename: &str) -> result::Result<Lease, io::Error> {
     let mut part1 = File::open(filename)?;
     let mut pile_of_bytes: Vec<u8> = vec![0; 2500];
     part1.read(&mut pile_of_bytes).unwrap();
     let mut rdr = Cursor::new(pile_of_bytes);
-    let share: Share = rdr.read_be().unwrap();
+    let share: Lease = rdr.read_be().unwrap();
     Ok(share)
 }
 
@@ -34,13 +34,13 @@ mod tests {
     #[test]
     fn basic_read_lease() {
 	let s = read_cap("1of2.0").unwrap();
-	assert_eq!(s.lease_version, 2);
-        assert_eq!(s.lease_data_length, 1906);
-        assert_eq!(s.lease_count, 1);
+	assert_eq!(s.version, 2);
+        assert_eq!(s.data_length, 1906);
+        assert_eq!(s.count, 1);
 
 	let s = read_cap("1of2.1").unwrap();
-	assert_eq!(s.lease_version, 2);
-        assert_eq!(s.lease_data_length, 1906);
-        assert_eq!(s.lease_count, 1);
+	assert_eq!(s.version, 2);
+        assert_eq!(s.data_length, 1906);
+        assert_eq!(s.count, 1);
     }
 }
