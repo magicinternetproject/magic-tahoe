@@ -2,3 +2,4 @@
 
 Wherein Shae and Meejah attempt to grok Tahoe-LAFS and convert that knowledge to Rust
 
+In the first episode, we distract ourselves by learning jujutsu, the new VCS on top of git.
