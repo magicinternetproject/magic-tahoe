@@ -32,8 +32,15 @@ mod tests {
     // cap = "URI:CHK:pyv3qypbpk6knq5ozeibenuubq:jh3twlgmxtytwqtzn6jtbsfy2w574ybkcnalurlnlq2snuu3j5da:1:2:56"
     use super::*;
     #[test]
-    fn it_works() {
+    fn basic_read_lease() {
 	let s = read_cap("1of2.0").unwrap();
 	assert_eq!(s.lease_version, 2);
+        assert_eq!(s.lease_data_length, 1906);
+        assert_eq!(s.lease_count, 1);
+
+	let s = read_cap("1of2.1").unwrap();
+	assert_eq!(s.lease_version, 2);
+        assert_eq!(s.lease_data_length, 1906);
+        assert_eq!(s.lease_count, 1);
     }
 }
