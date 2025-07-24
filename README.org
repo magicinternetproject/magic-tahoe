@@ -1,0 +1,4 @@
+* Magic Tahoe
+
+Wherein Shae and Meejah attempt to grok Tahoe-LAFS and convert that knowledge to Rust
+
