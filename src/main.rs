@@ -43,4 +43,17 @@ mod tests {
         assert_eq!(s.data_length, 1906);
         assert_eq!(s.count, 1);
     }
+
+    #[test]
+    fn sanity_check_bytes() -> Result<()>{
+	let s = read_cap("1of2.0").unwrap();
+        let raw_file = File::open("1of2.0")?;
+
+        assert_eq!(s.share_data.len(), s.data_length as usize);
+        // check that our assumptions about this file layout are
+        // valid: there are 3 longs as the "header" and one "lease" on
+        // the end, so everything else should be share-data
+        assert_eq!(raw_file.metadata()?.len(), (s.data_length + 12 + (72 * s.count)) as u64);
+        Ok(())
+    }
 }
