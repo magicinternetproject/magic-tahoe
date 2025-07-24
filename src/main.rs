@@ -56,4 +56,16 @@ mod tests {
         assert_eq!(raw_file.metadata()?.len(), (s.data_length + 12 + (72 * s.count)) as u64);
         Ok(())
     }
+
+    #[test]
+    fn read_a_share() {
+	let lease = read_cap("1of2.0").unwrap();
+        let mut rdr = Cursor::new(lease.share_data);
+        let share: Share = rdr.read_be().unwrap();
+
+        // stuff we "just know" about this Share test-vector
+        assert_eq!(share.version, 1);
+        assert_eq!(share.block_size, 8);
+        assert_eq!(share.data_size, 56);
+    }
 }
